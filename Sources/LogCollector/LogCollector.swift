@@ -13,12 +13,15 @@ public class LogCollector<T: LogData & Equatable> {
     private var supervisor: Supervisor<T>!
 
     /// Initialize and prepre wirker task
+    /// - Parameter bufferBatchSize: max count of payloads to pass each worker task
+    /// - Parameter workerInterval: worker invoke interval secounds
     /// - Parameter workerTask: worker task block
     public init(
+        bufferBatchSize: Int = 5,
         workerInterval: Double = 60 * 5,
         workerTask: @escaping (_ logs: [T]) throws -> Void
     ) {
-        buffer = Buffer<T>()
+        buffer = Buffer<T>(batchSize: bufferBatchSize)
         supervisor = Supervisor(
             buffer: buffer,
             workerInterval: workerInterval,
