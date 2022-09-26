@@ -31,8 +31,8 @@ final class BufferTests: XCTestCase {
     
     func testOrderdLogsWithPushRevertOrder() {
         let buffer = Buffer<TestLogData>()
-        let data1 = TestLogData(message: "Test1")
-        let data2 = TestLogData(message: "Test2")
+        let data1 = TestLogData(message: "Test1", time: Date())
+        let data2 = TestLogData(message: "Test2", time: Date().advanced(by: 10))
         
         buffer.pushLogs([data2, data1])
         
@@ -41,8 +41,8 @@ final class BufferTests: XCTestCase {
     
     func testOrderdLogsWithPushRegulerOrder() {
         let buffer = Buffer<TestLogData>()
-        let data1 = TestLogData(message: "Test")
-        let data2 = TestLogData(message: "Test")
+        let data1 = TestLogData(message: "Test", time: Date())
+        let data2 = TestLogData(message: "Test", time: Date().advanced(by: 10))
         
         buffer.pushLogs([data1, data2])
         

@@ -13,9 +13,9 @@ class TestLogData: LogData, Equatable {
     let time: Date
     let message: String
     
-    init(message: String) {
+    init(message: String, time: Date = Date()) {
         self.id = UUID().uuidString
-        self.time = Date()
+        self.time = time
         self.message = message
     }
     
