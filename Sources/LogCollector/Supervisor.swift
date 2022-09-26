@@ -58,6 +58,9 @@ class Supervisor<T: LogData & Equatable> {
     /// If worker task failed, re-push poped log data to restore initial state
     func invokeWorker() {
         let processingLogs = buffer.popLogs()
+        if processingLogs.isEmpty {
+            return
+        }
         
         do {
             try workerTask(processingLogs)

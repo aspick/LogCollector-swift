@@ -4,11 +4,11 @@ import XCTest
 final class LogCollectorTests: XCTestCase {
     
     func testStoreBatchSizeLogsAndInvokeWoker() {
-        innerTestStoreLogsAndInvokeWorker(logSize: 5, invokeCount: 2, assetTimeout: 3, line: #line)
+        innerTestStoreLogsAndInvokeWorker(logSize: 5, invokeCount: 1, assetTimeout: 3, line: #line)
     }
     
     func testStoreOverBatchSizeLogsAndInvokeWorker() {
-        innerTestStoreLogsAndInvokeWorker(logSize: 8, invokeCount:3, assetTimeout: 5, line: #line)
+        innerTestStoreLogsAndInvokeWorker(logSize: 8, invokeCount:2, assetTimeout: 5, line: #line)
     }
     
     func innerTestStoreLogsAndInvokeWorker(logSize: Int, invokeCount: Int, assetTimeout: Double, line: UInt) {
