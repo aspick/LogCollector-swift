@@ -4,14 +4,14 @@ import XCTest
 final class LogCollectorTests: XCTestCase {
     
     func testStoreBatchSizeLogsAndInvokeWoker() {
-        innerTestStoreLogsAndInvokeWorker(logSize: 5, invokeCount: 1, assetTimeout: 3, line: #line)
+        innerTestStoreLogsAndInvokeWorker(logSize: 5, invokeCount: 1, assertTimeout: 3, line: #line)
     }
     
     func testStoreOverBatchSizeLogsAndInvokeWorker() {
-        innerTestStoreLogsAndInvokeWorker(logSize: 8, invokeCount:2, assetTimeout: 5, line: #line)
+        innerTestStoreLogsAndInvokeWorker(logSize: 8, invokeCount:2, assertTimeout: 5, line: #line)
     }
     
-    func innerTestStoreLogsAndInvokeWorker(logSize: Int, invokeCount: Int, assetTimeout: Double, line: UInt) {
+    func innerTestStoreLogsAndInvokeWorker(logSize: Int, invokeCount: Int, assertTimeout: Double, line: UInt) {
         var processedLogs: [TestLogData] = []
         let exp = expectation(description: "worker invoked")
         exp.assertForOverFulfill = false
@@ -31,7 +31,7 @@ final class LogCollectorTests: XCTestCase {
         
         XCTAssert(processedLogs.isEmpty)
         
-        if XCTWaiter.wait(for: [exp], timeout: assetTimeout) == .timedOut {
+        if XCTWaiter.wait(for: [exp], timeout: assertTimeout) == .timedOut {
             XCTFail("worker not invoked", line: line)
         }
         XCTAssertEqual(processedLogs.count, logSize, line: line)
